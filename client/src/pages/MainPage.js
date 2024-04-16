@@ -13,6 +13,8 @@ export default function MainPage() {
 
   const [currencyNames, setCurrencyNames] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,10 +26,8 @@ export default function MainPage() {
           amountInSourceCurrency,
         },
       });
-      //TODO: set the rest...
       setAmountInTargetCurrency(response.data);
-      // const result = document.createElement(response);
-      // document.getElementById("myDiv").appendChild(result);
+      setLoading(false);
     } catch (err) {
       console.error(err);
     }
@@ -157,7 +157,15 @@ export default function MainPage() {
           </form>
         </section>
       </div>
-      {amountInTargetCurrency}
+      {!loading ? (
+        <section className="lg:mx-60 text-xl mt-5">
+          {amountInSourceCurrency} {currencyNames[sourceCurrency]} equals to{" "}
+          <span className="text-green-500 font-bold">
+            {amountInTargetCurrency}
+          </span>{" "}
+          {currencyNames[targetCurrency]}
+        </section>
+      ) : null}
     </div>
   );
 }
