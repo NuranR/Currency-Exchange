@@ -10,6 +10,16 @@ export default function MainPage() {
   // to store the calculated value
   const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(
+      date,
+      setSourceCurrency,
+      targetCurrency,
+      amountInSourceCurrency
+    );
+  };
+
   return (
     <div>
       <h1 className="lg:mx-32 text-5xl font-bold text-green-500">
@@ -23,7 +33,7 @@ export default function MainPage() {
       </p>
       <div className="mt-5 flex items-center justify-center flex-col">
         <section className="w-full lg:w-1/2">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-5">
               <label
                 htmlFor={date}
@@ -32,6 +42,7 @@ export default function MainPage() {
                 Date
               </label>
               <input
+                onChange={(e) => setDate(e.target.value)}
                 type="date"
                 id={date}
                 name={date}
@@ -51,14 +62,14 @@ export default function MainPage() {
                 Source Currency
               </label>
               <select
+                onChange={(e) => setSourceCurrency(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                  focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                    dark:focus:ring-green-500 dark:focus:border-green-500"
-                placeholder="Select source currency"
-                required
                 name={sourceCurrency}
                 id={sourceCurrency}
+                value={sourceCurrency}
               >
                 <option value="">Select source currency</option>
               </select>
@@ -71,12 +82,11 @@ export default function MainPage() {
                 Target Currency
               </label>
               <select
+                onChange={(e) => setTargetCurrency(e.target.value)}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                  focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                    dark:focus:ring-green-500 dark:focus:border-green-500"
-                placeholder="Select target currency"
-                required
                 name={targetCurrency}
                 id={targetCurrency}
               >
@@ -91,6 +101,7 @@ export default function MainPage() {
                 Amount in source currency
               </label>
               <input
+                onChange={(e) => setAmountInSourceCurrency(e.target.value)}
                 type="number"
                 id={amountInSourceCurrency}
                 name={amountInSourceCurrency}
@@ -102,10 +113,7 @@ export default function MainPage() {
                 required
               />
             </div>
-            <button
-              type="button"
-              className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md"
-            >
+            <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">
               Get the target currency
             </button>
           </form>
