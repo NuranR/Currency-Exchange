@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function MainPage() {
+  // states for the 4 fields
+  const [date, setDate] = useState(null);
+  const [sourceCurrency, setSourceCurrency] = useState(null);
+  const [targetCurrency, setTargetCurrency] = useState(null);
+  const [amountInSourceCurrency, setAmountInSourceCurrency] = useState(0);
+
+  // to store the calculated value
+  const [amountInTargetCurrency, setAmountInTargetCurrency] = useState(0);
+
   return (
     <div>
       <h1 className="lg:mx-32 text-5xl font-bold text-green-500">
@@ -17,14 +26,15 @@ export default function MainPage() {
           <form>
             <div className="mb-5">
               <label
-                htmlFor=""
+                htmlFor={date}
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Date
               </label>
               <input
                 type="date"
-                id="date"
+                id={date}
+                name={date}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                  focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
@@ -35,7 +45,7 @@ export default function MainPage() {
             </div>
             <div className="mb-5">
               <label
-                htmlFor=""
+                htmlFor={sourceCurrency}
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Source Currency
@@ -47,15 +57,15 @@ export default function MainPage() {
                    dark:focus:ring-green-500 dark:focus:border-green-500"
                 placeholder="Select source currency"
                 required
-                name=""
-                id=""
+                name={sourceCurrency}
+                id={sourceCurrency}
               >
                 <option value="">Select source currency</option>
               </select>
             </div>
             <div className="mb-5">
               <label
-                htmlFor=""
+                htmlFor={targetCurrency}
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Target Currency
@@ -67,22 +77,23 @@ export default function MainPage() {
                    dark:focus:ring-green-500 dark:focus:border-green-500"
                 placeholder="Select target currency"
                 required
-                name=""
-                id=""
+                name={targetCurrency}
+                id={targetCurrency}
               >
                 <option value="">Select target currency</option>
               </select>
             </div>
             <div className="mb-5">
               <label
-                htmlFor=""
+                htmlFor={amountInSourceCurrency}
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Amount in source currency
               </label>
               <input
                 type="number"
-                id="date"
+                id={amountInSourceCurrency}
+                name={amountInSourceCurrency}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                  focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700
                   dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
@@ -91,10 +102,12 @@ export default function MainPage() {
                 required
               />
             </div>
-            <button className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md">
+            <button
+              type="button"
+              className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md"
+            >
               Get the target currency
             </button>
-            
           </form>
         </section>
       </div>
